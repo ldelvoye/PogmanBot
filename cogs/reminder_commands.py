@@ -3,3 +3,12 @@
 # 24 hours before general coop application deadlines, <@Daily Reminders>
 
 import print
+import discord
+from discord.ext import commands
+
+class reminderCommands(commands.cog):
+    def __init__(self, bot):
+        self.bot = bot
+        
+def setup(bot):
+    bot.add_cog(reminderCommands(bot))

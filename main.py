@@ -1,16 +1,15 @@
 import discord
+from discord.ext import commands
 from config import TOKEN
 
+extensions = ['cogs.help_commands',
+              'cogs.deadlines_commands',
+              'cogs.reminder_commands']
 
+bot = commands.Bot(command_prefix="@PogmanBot")
 
-client = discord.Client()
-
-@client.event
-async def message(message):
-    # recognizes message was sent, grabs username, channel, command string, date
-    # interpretation
-    # message box
-    # printing the message
-    return
-
-client.run(TOKEN)
+if __name__ == '__main__':
+    for ext in extensions:
+        bot.load_extensions(ext)
+        
+bot.run(TOKEN)

@@ -1,7 +1,7 @@
 import discord
+from config import TOKEN
 
 
-TOKEN = "ODg4MTg2MzQ3NTkwOTM4NjY2.YUPB_g.0dsPjWvfow3vqguvlirGG-wdvMM"
 
 client = discord.Client()
 

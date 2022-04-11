@@ -2,7 +2,7 @@
 import discord
 from discord.ext import commands
 
-def embed(CourseName, Date, Colour, CalendarLink, NumDeadlines):
+def embedMessage(CourseName, Date, Colour, CalendarLink, NumDeadlines):
     # {CourseName, Date, Colour, CalendarLink} = String --- NumDeadlines = Int.
     embed = discord.Embed(
         Title = Date,

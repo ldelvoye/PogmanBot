@@ -15,8 +15,8 @@ class deadlinesCommands(commands.Cog):
     
     @commands.command()
     async def general_deadlines(self, ctx):
-        future_deadlines = "To be Done (MYSQL)"
-        embd = embed(future_deadlines)
+        future_deadlines = 'To be Done (MYSQL)'
+        embd = embedMessage(future_deadlines)
         await ctx.channel.send(ctx.message.author.mention + embd)
         
 def setup(bot):

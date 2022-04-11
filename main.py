@@ -6,7 +6,7 @@ extensions = ['cogs.help_commands',
               'cogs.deadlines_commands',
               'cogs.reminder_commands']
 
-bot = commands.Bot(command_prefix="@PogmanBot")
+bot = commands.Bot(command_prefix='@PogmanBot')
 
 if __name__ == '__main__':
     for ext in extensions:

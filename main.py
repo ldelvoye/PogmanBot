@@ -12,4 +12,8 @@ if __name__ == '__main__':
     for ext in extensions:
         bot.load_extensions(ext)
         
+@bot.event
+async def on_ready():
+    print('Bot is ready.')
+
 bot.run(TOKEN)

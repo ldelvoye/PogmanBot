@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector import errorcode
-from cogs.setup_db import db, cursor
+from setup_db import db, cursor
 
 def use_database(db_name):
     cursor.execute(f"USE {db_name}")
@@ -13,11 +13,10 @@ def create_course_table(course):
     table = (
         f"CREATE TABLE `{course}` ("   
         "   `assignment_name` varchar(250) NOT NULL,"
-        "   `assignment_number` int(11) NOT NULL,"
-        "   `date_open` varchar(250) NOT NULL,"
         "   `date_due` varchar(250) NOT NULL,"
         "   `percentage_worth` decimal(4,2) NOT NULL,"
-        "   PRIMARY KEY (`assignment_number`)"
+        "   `tag` varchar(250) NOT NULL,"
+        "   PRIMARY KEY (`assignment_name`)"
         ") ENGINE=InnoDB")
     
     try:
@@ -56,8 +55,8 @@ def create_coop_table(term):
     else:
         print("OK")
         
-def add_onto_course_table(course, name, number, start, end, worth):
-    cursor.execute(f"INSERT INTO pogmanbot.{course}({name}, {number}, {start}, {end}, {worth})")
+def add_onto_course_table(course, name, end, worth, tag):
+    cursor.execute(f"INSERT INTO pogmanbot.{course}(assignment_name, date_due, percentage_worth, tag) VALUES('{name}', '{end}', '{worth}', '{tag}')")
     db.commit()
 
 def add_onto_coop_table(round_num, apps, date_open, date_due, interview_period, employer_rankings, student_rankings, match_results):

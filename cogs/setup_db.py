@@ -1,4 +1,4 @@
-from cogs.config import *
+from config import *
 import mysql.connector
 
 config = {

@@ -3,11 +3,10 @@
     # @PogmanBot bruh
     # @Pogmanbot help
     
-import print
 import discord
 from discord.ext import commands
 
-class helpCommands(commands.cog):
+class helpCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

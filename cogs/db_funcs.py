@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector import errorcode
-from setup_db import db, cursor
+from cogs.setup_db import db, cursor
 
 def use_database(db_name):
     cursor.execute(f"USE {db_name}")
@@ -14,7 +14,7 @@ def create_course_table(course):
         f"CREATE TABLE `{course}` ("   
         "   `assignment_name` varchar(250) NOT NULL,"
         "   `date_due` varchar(250) NOT NULL,"
-        "   `percentage_worth` decimal(4,2) NOT NULL,"
+        "   `percentage_worth` int(11) NOT NULL,"
         "   `tag` varchar(250) NOT NULL,"
         "   PRIMARY KEY (`assignment_name`)"
         ") ENGINE=InnoDB")
@@ -55,8 +55,8 @@ def create_coop_table(term):
     else:
         print("OK")
         
-def add_onto_course_table(course, name, end, worth, tag):
-    cursor.execute(f"INSERT INTO pogmanbot.{course}(assignment_name, date_due, percentage_worth, tag) VALUES('{name}', '{end}', '{worth}', '{tag}')")
+def add_onto_course_table(name, end, worth, tag):
+    cursor.execute(f"INSERT INTO pogmanbot.courses(assignment_name, date_due, percentage_worth, tag) VALUES('{name}', '{end}', '{worth}', '{tag}')")
     db.commit()
 
 def add_onto_coop_table(round_num, apps, date_open, date_due, interview_period, employer_rankings, student_rankings, match_results):
@@ -75,11 +75,22 @@ def count_rows(table):
     return cursor.fetchall()[0][0]
 
 def get_specific_course_values(course):
-    num_rows = count_rows(f"{course}")
-    sql = f"SELECT * from PogmanBot.{course}"
+    if course == "all":
+        sql = f"SELECT * from PogmanBot.courses"
+    else:
+        sql = f"SELECT * from PogmanBot.courses WHERE tag = '{course}'"
     cursor.execute(sql)
     output = []
-    for i in range(num_rows):
-        values = cursor.fetchmany(1)
-        output.append(list(values[0]))
+    values = cursor.fetchall()
+    for i in values:
+        output.append(list(i))
+    return output
+
+def get_coop_values():
+    sql = f"SELECT * from PogmanBot.1b_coop"
+    cursor.execute(sql)
+    output = []
+    values = cursor.fetchall()
+    for i in values:
+        output.append(list(i))
     return output

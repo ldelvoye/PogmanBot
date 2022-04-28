@@ -1,3 +1,3 @@
-import db_funcs
+from datetime import datetime
 
-print(db_funcs.retrieve_column_headers('106'))
+print(datetime.now().date())
